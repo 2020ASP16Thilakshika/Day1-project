@@ -1,23 +1,27 @@
 <?php
-//constant variable
-define('SERVERNAME', '127.0.0.1:3306');
-define('USERNAME', 'root');
-define('PASSWORD', 'mariadb');
-define('DBNAME', 'school');
+//get the db connection file
+require_once 'dbconf.php';
+
 try {
-	//connect with database
-	$connect = mysqli_connect(SERVERNAME,USERNAME,PASSWORD,DBNAME);
-	if (!$connect) {
-		die("connection failed".mysqli_connect_error());
-	} 
-	else {
-		//echo "Connected successfully";
+
+	//Query
+	$sql = "SELECT * FROM STUDENTS";
+
+	//excute the quey
+	$result = mysqli_query($connect,$sql);
+	//check if data exists in the table
+	if (mysqli_num_rows($result)>0) {
+		// fetch the data from rows
+		while ($row = mysqli_fetch_assoc($result)) {
+			print_r($row);
+		}
+	} else {
+		echo "No results";
 	}
-} 
-catch (Exception $e) {
+	
+} catch (Exception $e) {
 	die($e->getMessage());
 }
 
-//echo "abc<br>";
 
 ?>
