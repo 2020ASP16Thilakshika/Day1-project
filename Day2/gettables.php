@@ -47,4 +47,4 @@ try {
 
 PrintTable("student",$connect);
 
-//PrintTable("boat",$connect);
+PrintTable("boat",$connect);
